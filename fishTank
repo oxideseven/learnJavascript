@@ -1,0 +1,62 @@
+background(36, 147, 181);
+var fishRand = random(4,12);
+var fishCount = 0;
+var rockRand = random(64,128);
+var rockCount = 0;
+
+var drawFish = function(){
+    var centerX = random(0,400);
+    var centerY = random(0,400);
+    var bodyLength = random(20,120);
+    var bodyHeight = bodyLength / random(1,6);
+    var bodyColor = color(random(0,255),random(0,255), random(0,255));
+    var tailWidth = bodyLength/4;
+    var tailHeight = bodyHeight/2; 
+    var fishDir = random(0,1);
+	
+	if (fishDir > 0.5){
+		noStroke();
+		fill(bodyColor);
+		// body
+		ellipse(centerX, centerY, bodyLength, bodyHeight);
+		// tail
+		triangle(centerX-bodyLength/2, centerY, //tail to body point
+		centerX-bodyLength/(random(1,2))-tailWidth, centerY-tailHeight, //tail top
+		centerX-bodyLength/2-tailWidth, centerY+tailHeight); //tail bottom
+		// eye
+		fill(33, 33, 33);
+		ellipse(centerX+bodyLength/4, centerY, bodyHeight/5, bodyHeight/5);
+	}	else{
+			noStroke();
+			fill(bodyColor);
+			// body
+			ellipse(centerX, centerY, bodyLength, bodyHeight);
+			// tail
+			triangle(centerX+bodyLength/2, centerY,
+			centerX+bodyLength-tailWidth+random(1,10), centerY-tailHeight,
+			centerX+bodyLength-tailWidth, centerY+tailHeight);
+			// eye
+			fill(33, 33, 33);
+			ellipse(centerX-bodyLength/4, centerY, bodyHeight/5, bodyHeight/5);
+		}
+
+};
+var drawRocks = function(){
+    var greyness = random(0,255);
+    var rockX = random(0,400);
+    var rockY = random(390,400);
+    var rockW = random(16,32);
+    var rockH = rockW/2;
+    
+    fill(greyness, greyness, greyness);
+    ellipse(rockX, rockY, rockW, rockH);
+};
+
+while (fishCount < fishRand){
+	drawFish();
+	fishCount++;
+}
+while (rockCount < rockRand){
+	drawRocks();
+	rockCount++;
+}
